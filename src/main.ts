@@ -3,16 +3,26 @@ import { CatalogoPokemon } from "./catalogo.js";
 
 const catalogo = new CatalogoPokemon();
 
-const pokemon = await buscarPokemon("pikachu");
+catalogo.listar();
 
-if (pokemon === null) {
-    console.log("[ERRO] Pokémon não encontrado: pikachu");
+const pikachu = await buscarPokemon("pikachu");
+const charmander = await buscarPokemon("charmander");
+
+if (pikachu !== null) {
+    catalogo.adicionar(pikachu);
+}
+
+if (charmander !== null) {
+    catalogo.adicionar(charmander);
+}
+
+catalogo.listar();
+
+const pokemonEncontrado = catalogo.buscar(999);
+
+if (pokemonEncontrado) {
+    console.log("Pokémon encontrado no catálogo:");
+    console.log(pokemonEncontrado);
 } else {
-    catalogo.adicionar(pokemon);
-
-    catalogo.listar();
-
-    catalogo.remover(25);
-
-    catalogo.listar();
+    console.log("[AVISO] Pokémon não encontrado no catálogo.");
 }
