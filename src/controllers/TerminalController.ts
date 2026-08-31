@@ -7,9 +7,11 @@ export class TerminalController {
     async iniciar(): Promise<void> {
         await this.catalogo.carregar();
 
-        const pikachu = await buscarPokemon("pikachu");
-        const charmander = await buscarPokemon("charmander");
-        const inexistente = await buscarPokemon("pokemon-inexistente");
+        const [pikachu, charmander, inexistente] = await Promise.all([
+            buscarPokemon("pikachu"),
+            buscarPokemon("charmander"),
+            buscarPokemon("pokemon-inexistente")
+        ]);
 
         if (pikachu !== null) {
             await this.catalogo.adicionar(pikachu);

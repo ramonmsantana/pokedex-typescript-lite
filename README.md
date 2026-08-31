@@ -17,9 +17,11 @@ O objetivo do projeto é praticar conceitos fundamentais de desenvolvimento Back
 - Fetch
 - Promises
 - Async/Await
+- Concorrência assíncrona com `Promise.all`
 - Tratamento de erros com try/catch
 - Persistência local em arquivo JSON
 - Manipulação de arquivos com `node:fs/promises`
+- Imutabilidade funcional na manipulação do catálogo
 - Organização modular do código
 - Separação de responsabilidades em camadas
 - Versionamento com Git e GitHub
@@ -82,6 +84,7 @@ npm run build
 A aplicação permite:
 
 - Buscar Pokémon por nome ou ID utilizando a PokéAPI
+- Realizar múltiplas consultas à PokéAPI de forma concorrente
 - Transformar os dados recebidos da API em um objeto simplificado
 - Adicionar Pokémon ao catálogo local
 - Impedir a adição de Pokémon duplicado
@@ -126,12 +129,16 @@ A camada `controllers` coordena o fluxo da aplicação.
 
 O arquivo `TerminalController.ts` utiliza os serviços responsáveis pela consulta à PokéAPI e pelo gerenciamento do catálogo local.
 
+As consultas utilizadas no fluxo de demonstração são executadas de forma concorrente utilizando `Promise.all`.
+
 ### Services
 
 A camada `services` concentra as regras de negócio e o acesso aos dados.
 
 - `PokeApiService.ts`: realiza a consulta de Pokémon na PokéAPI utilizando `fetch`, `async/await` e tratamento de erros.
 - `LocalBoxService.ts`: gerencia o catálogo de Pokémon, incluindo carregamento, adição, busca, listagem, remoção e persistência dos dados.
+
+Na adição de Pokémon ao catálogo, um novo array é criado em vez de alterar diretamente o array existente, aplicando o conceito de imutabilidade funcional.
 
 ### Models
 
@@ -176,10 +183,12 @@ Durante o desenvolvimento foram aplicados os seguintes conceitos:
 - Consumo de API REST externa utilizando `fetch()`
 - Promises
 - Funções assíncronas com `async/await`
+- Execução concorrente de operações assíncronas com `Promise.all`
 - Tratamento de erros utilizando `try/catch`
 - Manipulação de JSON
 - Persistência local com `node:fs/promises`
 - Leitura e escrita de arquivos
+- Imutabilidade funcional com criação de novos arrays
 - Separação de responsabilidades em Controllers, Services, Models e Utils
 - Organização modular do código
 
@@ -188,13 +197,14 @@ Durante o desenvolvimento foram aplicados os seguintes conceitos:
 Ao iniciar a aplicação:
 
 1. O catálogo existente é carregado a partir do arquivo `pc_box.json`.
-2. A aplicação consulta Pokémon na PokéAPI.
+2. A aplicação consulta múltiplos Pokémon na PokéAPI de forma concorrente utilizando `Promise.all`.
 3. Os dados recebidos são transformados para o formato utilizado pelo sistema.
 4. Os Pokémon podem ser adicionados ao catálogo.
 5. A aplicação verifica e impede Pokémon duplicados.
-6. O catálogo pode ser listado e consultado.
-7. Pokémon podem ser removidos pelo ID.
-8. As alterações realizadas no catálogo são persistidas no arquivo `pc_box.json`.
+6. A adição ao catálogo utiliza a criação de um novo array, preservando o princípio de imutabilidade funcional.
+7. O catálogo pode ser listado e consultado.
+8. Pokémon podem ser removidos pelo ID.
+9. As alterações realizadas no catálogo são persistidas no arquivo `pc_box.json`.
 
 ## Exemplo de execução
 
@@ -244,3 +254,4 @@ Branches utilizadas:
 - `feat/pokedex`: desenvolvimento das funcionalidades iniciais da Pokédex.
 - `docs/readme`: criação e atualização da documentação inicial do projeto.
 - `refactor/arquitetura-camadas`: adequação da arquitetura em camadas e implementação da persistência local.
+- `refactor/ajustes-finais`: implementação de concorrência assíncrona e imutabilidade funcional.

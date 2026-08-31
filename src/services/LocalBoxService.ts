@@ -35,7 +35,7 @@ export class CatalogoPokemon {
             return;
         }
 
-        this.pokemons.push(pokemon);
+        this.pokemons = [...this.pokemons, pokemon];
 
         await this.salvar();
 
