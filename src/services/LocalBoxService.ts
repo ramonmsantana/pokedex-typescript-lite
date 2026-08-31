@@ -1,5 +1,6 @@
 import { readFile, writeFile } from "node:fs/promises";
 import type { PokemonResumo } from "../models/Pokemon.js";
+import { formatarPokemon } from "../utils/textFormatters.js";
 
 const CAMINHO_ARQUIVO = "./pc_box.json";
 
@@ -46,11 +47,9 @@ export class CatalogoPokemon {
             console.log("[AVISO] Catálogo vazio.");
             return;
         }
-
+        
         this.pokemons.forEach((pokemon) => {
-            console.log(
-                `#${pokemon.id} - ${pokemon.nome} | Tipos: ${pokemon.tipos.join(", ")} | Altura: ${pokemon.altura} | Peso: ${pokemon.peso}`
-            );
+            console.log(formatarPokemon(pokemon));
         });
     }
 
