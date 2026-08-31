@@ -9,7 +9,10 @@ if (pokemon === null) {
     console.log("[ERRO] Pokémon não encontrado: pikachu");
 } else {
     catalogo.adicionar(pokemon);
-    catalogo.adicionar(pokemon);
+
+    catalogo.listar();
+
+    catalogo.remover(25);
 
     catalogo.listar();
 }

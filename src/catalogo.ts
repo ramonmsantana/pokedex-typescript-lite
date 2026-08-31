@@ -31,7 +31,20 @@ adicionar(pokemon: PokemonResumo): void {
         });
     }
 
-    remover(id: number): void {
-        this.pokemons = this.pokemons.filter((pokemon) => pokemon.id !== id);
+   remover(id: number): void {
+    const pokemonEncontrado = this.pokemons.find(
+        (pokemon) => pokemon.id === id
+    );
+
+    if (!pokemonEncontrado) {
+        console.log("[AVISO] Nenhum Pokémon encontrado com esse ID.");
+        return;
     }
+
+    this.pokemons = this.pokemons.filter(
+        (pokemon) => pokemon.id !== id
+    );
+
+    console.log("[OK] Pokémon removido do catálogo.");
+}
 }
