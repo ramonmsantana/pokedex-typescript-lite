@@ -1,22 +1,23 @@
-import { buscarPokemon } from "./pokeApi.js";
-import { CatalogoPokemon } from "./catalogo.js";
+import { buscarPokemon } from "./services/PokeApiService.js";
+import { CatalogoPokemon } from "./services/LocalBoxService.js";
 
 const catalogo = new CatalogoPokemon();
 
+await catalogo.carregar();
 const pikachu = await buscarPokemon("pikachu");
 const charmander = await buscarPokemon("charmander");
 const inexistente = await buscarPokemon("pokemon-inexistente");
 
 if (pikachu !== null) {
-    catalogo.adicionar(pikachu);
+    await catalogo.adicionar(pikachu);
 }
 
 if (charmander !== null) {
-    catalogo.adicionar(charmander);
+    await catalogo.adicionar(charmander);
 }
 
 if (pikachu !== null) {
-    catalogo.adicionar(pikachu);
+    await catalogo.adicionar(pikachu);
 }
 
 if (inexistente === null) {
@@ -34,6 +35,6 @@ if (pokemonEncontrado) {
     console.log("[AVISO] Pokémon não encontrado no catálogo.");
 }
 
-catalogo.remover(25);
+await catalogo.remover(25);
 
 catalogo.listar();
