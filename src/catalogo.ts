@@ -3,9 +3,20 @@ import type { PokemonResumo } from "./types.js";
 export class CatalogoPokemon {
     private pokemons: PokemonResumo[] = [];
 
-    adicionar(pokemon: PokemonResumo): void {
-        this.pokemons.push(pokemon);
+adicionar(pokemon: PokemonResumo): void {
+    const pokemonJaExiste = this.pokemons.some(
+        (item) => item.id === pokemon.id
+    );
+
+    if (pokemonJaExiste) {
+        console.log(`[AVISO] ${pokemon.nome} já está no catálogo.`);
+        return;
     }
+
+    this.pokemons.push(pokemon);
+
+    console.log(`[OK] ${pokemon.nome} adicionado ao catálogo.`);
+}
 
     listar(): void {
         if (this.pokemons.length === 0) {
