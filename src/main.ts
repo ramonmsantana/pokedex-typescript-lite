@@ -1,5 +1,11 @@
 import { buscarPokemon } from "./pokeApi.js";
 
-const pokemon = await buscarPokemon("pikachu");
+const nomeOuId = "pokemon-inexistente";
 
-console.log(pokemon);
+const pokemon = await buscarPokemon(nomeOuId);
+
+if (pokemon === null) {
+    console.log(`[ERRO] Pokémon não encontrado: ${nomeOuId}`);
+} else {
+    console.log(pokemon);
+}
