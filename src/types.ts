@@ -12,6 +12,8 @@ export interface PokemonApiResponse {
     height: number;
     weight: number;
     types: {
-        name: string
-    }[],
+        type: {
+            name: string
+        };
+    }[];
 }
