@@ -1,4 +1,4 @@
-import type { PokemonResumo, PokemonApiResponse } from "./types.js";
+import type { PokemonResumo, PokemonApiResponse } from "../models/Pokemon.js";
 
 export async function buscarPokemon(
     nomeOuId: string
